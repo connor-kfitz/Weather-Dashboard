@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Assets/Style/style.css">
+    <title>Document</title>
+</head>
+
+<header>
+    <h1>Weather Dashboard</h1>
+</header>
+
+<body>
+    
+
+    <div class="flexbox flexboxA">
+        <div class="flexbox citySearch">
+            <div class="searchBar">
+                <h2 id="citySearchHeader">Search for a City:</h2>
+                <textarea id="searchBar"></textarea>
+                <button id="searchButton">Submit</button>
+            </div>
+            <div class="flexbox searchHistory">
+                <h2 id="searchHistoryHeader">Search History</h2>
+            </div>
+        </div>   
+        <div class="flexbox flexboxB">
+            <div class="flexbox today">
+                <h1>Location & Today's Date</h1>
+                <h2>Temp: <span></span></h2>
+                <h2>Wind: <span></span></h2>
+                <h2>Humidity: <span></span></h2>
+                <h2>UV Index: <span></span></h2>
+            </div>
+            <div class="flexbox fiveDay">
+                <h1>Five Day Forecast:</h1>
+                <div class="flexbox fiveDayCards">
+                    <div class="fiveDayBox">Box1</div>
+                    <div class="fiveDayBox">Box2</div>
+                    <div class="fiveDayBox">Box3</div>
+                    <div class="fiveDayBox">Box4</div>
+                    <div class="fiveDayBox">Box5</div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="./Assets/JS/script.js"></script>
+</html>
