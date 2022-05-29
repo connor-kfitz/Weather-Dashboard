@@ -4,7 +4,8 @@ var queryURL = "http://api.openweathermap.org/data/2.5/weather?units=metric&q=" 
 var temp;
 var wind;
 var humidity;
-var uvIndex
+var uvIndex;
+
 
 fetch(queryURL)
     .then(function (response) {
@@ -31,6 +32,8 @@ fetch(queryURL)
             console.log(data);
             uvIndex = data.current.uvi;
             console.log(uvIndex);
+            iconCode = data.current.weather[0].icon;
+            console.log(iconCode);
         })
       });
 
@@ -41,11 +44,25 @@ var searchHistory = $('.searchHistory');
 searchButton.on('click', function (){
     var city = $('#searchBar').val();
     console.log(city);
+    $('#todayLocAndDate').text(city + ", " + moment().format('MMM Do YY'));
+    $('#weatherIcon').append('')
     $('#todayTemp').text(temp.toString());
     $('#todayWind').text(wind.toString());
     $('#todayHumidity').text(humidity.toString());
     $('#todayUV').text(uvIndex.toString());
-    searchHistory.append("<h2>" + city + "</h2>");
+    searchHistory.append("<div>" + city + "</div>");
+
+    //UV Index Colour
+    if(uvIndex < 3) {
+        $('#todayUV').css('background', 'yellow');
+        console.log('yes');
+    } 
+    else if(uvIndex < 6) {
+        $('#todayUV').css('background', 'green');
+    } 
+    else {
+        $('#todayUV').css('background', 'red');
+    }
 })
 
 
