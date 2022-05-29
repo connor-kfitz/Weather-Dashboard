@@ -106,6 +106,7 @@ header {
 
 .fiveDayBox {
     border: solid black 3px;
+    flex-flow: column;
     height: 100%;
     width: 15%;
 }
