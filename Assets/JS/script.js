@@ -8,6 +8,7 @@ var uvIndex;
 var fiveDayTemp = [0, 0, 0, 0, 0];
 var fiveDayWind = [0, 0, 0, 0, 0];
 var fiveDayHumidity = [0, 0, 0, 0, 0];
+var fiveDayIconCode = ["", "", "", "", ""];
 
 
 fetch(queryURL)
@@ -43,10 +44,9 @@ fetch(queryURL)
             fiveDayTemp[i] += data.daily[i].temp.day;
             fiveDayWind[i] += data.daily[i].wind_speed;
             fiveDayHumidity[i] += data.daily[i].humidity;
+            fiveDayIconCode[i] += data.daily[i].weather[0].icon;
             }
-            console.log(fiveDayTemp);
-            console.log(fiveDayWind);
-            console.log(fiveDayHumidity);
+            console.log(fiveDayIconCode);
         })
       });
 
@@ -60,25 +60,27 @@ searchButton.on('click', function (){
     searchHistory.append("<div>" + city + "</div>");
 
     $('#todayLocAndDate').text(city + ", " + moment().format('MMM Do YY'));
-    $('#weatherIcon').append('')
+    $('#weatherIcon').attr("src", "http://openweathermap.org/img/wn/" + iconCode + "@2x.png");
     $('#todayTemp').text(temp.toString());
     $('#todayWind').text(wind.toString());
     $('#todayHumidity').text(humidity.toString());
     $('#todayUV').text(uvIndex.toString());
 
     var boxTempDates =['#oneDayDate', '#twoDayDate', '#threeDayDate', '#fourDayDate', '#fiveDayDate'];
+    var boxIconIDs =['#oneDayWeatherIcon', '#twoDayWeatherIcon', '#threeDayWeatherIcon', '#fourDayWeatherIcon', '#fiveDayWeatherIcon'];
     var boxTempIDs =['#oneDayTemp', '#twoDayTemp', '#threeDayTemp', '#fourDayTemp', '#fiveDayTemp'];
     var boxWindIDs =['#oneDayWind', '#twoDayWind', '#threeDayWind', '#fourDayWind', '#fiveDayWind'];
     var boxHumidityIDs =['#oneDayHumidity', '#twoDayHumidity', '#threeDayHumidity', '#fourDayHumidity', '#fiveDayHumidity'];
     
     for(var i =0; i < 5; i++){
         $(boxTempDates[i]).text(moment().add(i, 'days').format('MMM Do YY'))
+        $(boxIconIDs[i]).attr("src", "http://openweathermap.org/img/wn/" + fiveDayIconCode[i] + "@2x.png");
         $(boxTempIDs[i]).text(fiveDayTemp[i]);
         $(boxWindIDs[i]).text(fiveDayWind[i]);
         $(boxHumidityIDs[i]).text(fiveDayHumidity[i]);
+
     }
     
-
     //UV Index Colour
     if(uvIndex < 3) {
         $('#todayUV').css('background', 'yellow');
