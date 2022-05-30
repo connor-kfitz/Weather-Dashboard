@@ -26,7 +26,7 @@ header {
 /* City Search Box */
 .citySearch {
     flex-flow: column;
-    border: solid black 5px;
+    /* border: solid black 5px; */
     width: 28%;
     margin: 1%;
     padding: 1%;
@@ -35,30 +35,38 @@ header {
 #searchBar {
     resize: none;
     border: solid black 2px;
-    width: 90%;
-    margin: 1%;
+    width: 99%;
+    margin-top: 1%;
 }
 
 #searchButton {
     border: solid black 2px;
-    width: 90%;
-    margin: 1% 1% 3% 1%;
+    border-radius: 4px;
+    width: 100%;
+    margin: 1% 0 3% 0;
 }
 
 .searchHistoryBox {
     flex-flow: column;
-    border: solid black 2px;
+    /* border: solid black 2px; */
+    border-top: solid black 4px;
+    height: 100%;
+    align-items: center;
 }
 
 #searchHistoryHeader {
-    border-top: solid black 4px;
+    align-self: flex-start;
     padding-top: 3%;
 }
 
 .searchHistoryBox button {
     border: solid black 2px;
-    width: 650px;
-    height: 50px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 140%;
+    width: 100%;
+    height: 5%;
+    margin: 2% 0 4% 0;
 }
 
 .flexboxB {
@@ -73,15 +81,14 @@ header {
 .today {
     flex-flow: column;
     align-items: stretch;
-    border: solid black 5px;
-    height: 50%;
+    border: solid black 4px;
     width: 98%;
     padding: 1%;
 }
 
 .today img {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
 .today h1 {
@@ -106,19 +113,20 @@ header {
 }
 
 .fiveDayCards {
-    justify-content: space-around;
-    height: 70%;
-    width: 100%;
+    justify-content: flex-start
 }
 
 .fiveDayBox {
     border: solid black 3px;
     flex-flow: column;
     height: 100%;
-    width: 15%;
+    width: 12%;
+    margin: 1% 3% 1% 1%;
+
 }
 
 .fiveDayBox img {
     width: 50px;
     height: 50px;
 }
+

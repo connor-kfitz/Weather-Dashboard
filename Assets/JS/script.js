@@ -1,16 +1,14 @@
 var APIKey = "eae30589ae86d52103436bee50214263";
-// var city = "Toronto";
-
-
 var boxTempDates =['#oneDayDate', '#twoDayDate', '#threeDayDate', '#fourDayDate', '#fiveDayDate'];
 var boxTempIDs =['#oneDayTemp', '#twoDayTemp', '#threeDayTemp', '#fourDayTemp', '#fiveDayTemp'];
 var boxWindIDs =['#oneDayWind', '#twoDayWind', '#threeDayWind', '#fourDayWind', '#fiveDayWind'];
 var boxHumidityIDs =['#oneDayHumidity', '#twoDayHumidity', '#threeDayHumidity', '#fourDayHumidity', '#fiveDayHumidity'];
 
-var historyMatrix = ["", "", "", "", ""];
+var historyMatrix = ["Toronto", "Etobicoke", "Ajax", "Waterloo", "Guelph"];
 var historyMatrixCount =0;
 
 function getData(cityName) {
+    console.log("RAN");
     var city;
     var temp;
     var wind;
@@ -34,7 +32,7 @@ function getData(cityName) {
             console.log(wind);
             humidity = (data.main.humidity);
             console.log(humidity); // %
-            $('#todayLocAndDate').text(city + ", " + moment().format('MMM Do YY'));
+            $('#todayLocAndDate').text(cityName + ", " + moment().format('MMM Do YY'));
             $('#todayTemp').text(temp.toString());
             $('#todayWind').text(wind.toString());
             $('#todayHumidity').text(humidity.toString());
@@ -62,6 +60,18 @@ function getData(cityName) {
                     }
                 $('#weatherIcon').attr("src", "http://openweathermap.org/img/wn/" + iconCode + "@2x.png");
                 $('#todayUV').text(uvIndex.toString());
+                //UV Index Colour
+                if(uvIndex < 3) {
+                    $('#todayUV').css('background', 'yellow');
+                    console.log('yes');
+                } 
+                else if(uvIndex < 6) {
+                    $('#todayUV').css('background', 'green');
+                } 
+                else {
+                    $('#todayUV').css('background', 'red');
+                }
+
                 var boxIconIDs =['#oneDayWeatherIcon', '#twoDayWeatherIcon', '#threeDayWeatherIcon', '#fourDayWeatherIcon', '#fiveDayWeatherIcon'];
                 for(var i =0; i < 5; i++){
                     $(boxTempDates[i]).text(moment().add(i, 'days').format('MMM Do YY'))
@@ -87,18 +97,9 @@ function getData(cityName) {
                 localStorage.setItem(city, JSON.stringify(cityWeather));
             })
         });
-    //UV Index Colour
-    if(uvIndex < 3) {
-        $('#todayUV').css('background', 'yellow');
-        console.log('yes');
-    } 
-    else if(uvIndex < 6) {
-        $('#todayUV').css('background', 'green');
-    } 
-    else {
-        $('#todayUV').css('background', 'red');
-    }
 }
+
+getData('Toronto');
 
 // Link search bar and button
 var searchButton = $('#searchButton');
@@ -107,53 +108,16 @@ var searchHistory = $('.searchHistory');
 searchButton.on('click', function (){
     var city = $('#searchBar').val();
     getData(city)
-
-    if(historyMatrixCount < 1){
-        historyMatrix[historyMatrixCount] = city;
-        $('#searchButton1').text(city);
-        historyMatrixCount++;
-    }   
-    else if(historyMatrixCount < 2){
-        historyMatrix[1] = historyMatrix[0]
-        historyMatrix[0] = city;
-        $('#searchButton1').text(city);
-        $('#searchButton2').text(historyMatrix[1]);
-        historyMatrixCount++;
-    }   
-    else if(historyMatrixCount < 3){
-        historyMatrix[2] = historyMatrix[1]
-        historyMatrix[1] = historyMatrix[0]
-        historyMatrix[0] = city;
-        $('#searchButton1').text(city);
-        $('#searchButton2').text(historyMatrix[1]);
-        $('#searchButton3').text(historyMatrix[2]);
-        historyMatrixCount++;
-    }   
-    else if(historyMatrixCount < 4){
-        historyMatrix[3] = historyMatrix[2]
-        historyMatrix[2] = historyMatrix[1]
-        historyMatrix[1] = historyMatrix[0]
-        historyMatrix[0] = city;
-        $('#searchButton1').text(city);
-        $('#searchButton2').text(historyMatrix[1]);
-        $('#searchButton3').text(historyMatrix[2]);
-        $('#searchButton4').text(historyMatrix[3]);
-        historyMatrixCount++;
-    }   
-    else{
-      historyMatrix.pop();
+    historyMatrix.pop();
       for(var i=0; i < 5; i++){
           historyMatrix[4-i]=historyMatrix[3-i];
       }
-        historyMatrix[0] = city;
-        $('#searchButton1').text(city);
-        $('#searchButton2').text(historyMatrix[1]);
-        $('#searchButton3').text(historyMatrix[2]);
-        $('#searchButton4').text(historyMatrix[3]);
-        $('#searchButton5').text(historyMatrix[4]);
-
-    }
-    
+    historyMatrix[0] = city;
+    $('#searchButton1').text(city);
+    $('#searchButton2').text(historyMatrix[1]);
+    $('#searchButton3').text(historyMatrix[2]);
+    $('#searchButton4').text(historyMatrix[3]);
+    $('#searchButton5').text(historyMatrix[4]);
 })
 
 var searchButton1 = $('#searchButton1');
@@ -162,4 +126,22 @@ var searchButton3 = $('#searchButton3');
 var searchButton4 = $('#searchButton4');
 var searchButton5 = $('#searchButton5');
 
-// searchButton1.on('click', history(historyMatrix[0]));
+searchButton1.on('click', function(){
+getData(historyMatrix[0]);
+})
+
+searchButton2.on('click', function(){
+getData(historyMatrix[1]);
+})
+
+searchButton3.on('click', function(){
+getData(historyMatrix[2]);
+})
+
+searchButton4.on('click', function(){
+getData(historyMatrix[3]);
+})
+
+searchButton5.on('click', function(){
+getData(historyMatrix[4]);
+})
