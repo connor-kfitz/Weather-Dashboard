@@ -17,8 +17,7 @@ header {
 
 .flexboxA {
     flex-wrap: row;
-    border: solid black 4px;
-    height: 1350px;
+    /* border: solid black 4px; */
     width: 98%;
     margin: 1%;
 }
@@ -81,14 +80,15 @@ header {
 .today {
     flex-flow: column;
     align-items: stretch;
+    background-color: #1F305E;
     border: solid black 4px;
     width: 98%;
     padding: 1%;
 }
 
 .today img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
 }
 
 .today h1 {
@@ -118,6 +118,7 @@ header {
 
 .fiveDayBox {
     border: solid black 3px;
+    background-color: #1F305E;
     flex-flow: column;
     height: 100%;
     width: 12%;

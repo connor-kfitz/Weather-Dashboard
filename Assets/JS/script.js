@@ -7,8 +7,21 @@ var boxHumidityIDs =['#oneDayHumidity', '#twoDayHumidity', '#threeDayHumidity', 
 var historyMatrix = ["Toronto", "Etobicoke", "Ajax", "Waterloo", "Guelph"];
 var historyMatrixCount =0;
 
+var breakFunction = false;
+
+
+function checkData(cityName) {
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?units=metric&q=" + cityName + "&current.uvi=true&appid=" + APIKey;
+    fetch(queryURL)
+        .then(function (response) {
+            if(response.status != 200) {
+                breakFunction = true;
+            }
+        })
+}
+
 function getData(cityName) {
-    console.log("RAN");
+
     var city;
     var temp;
     var wind;
@@ -22,8 +35,10 @@ function getData(cityName) {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?units=metric&q=" + cityName + "&current.uvi=true&appid=" + APIKey;
     fetch(queryURL)
         .then(function (response) {
-            return response.json();
+                breakFunction = true;
+                return response.json(); 
         })
+
         .then(function (data) {
             console.log(data);
             temp = (data.main.temp); // Cel
@@ -107,6 +122,11 @@ var searchHistory = $('.searchHistory');
 
 searchButton.on('click', function (){
     var city = $('#searchBar').val();
+    checkData(city)
+    if(breakFunction){
+        breakFunction = false;
+        return;
+    }
     getData(city)
     historyMatrix.pop();
       for(var i=0; i < 5; i++){
