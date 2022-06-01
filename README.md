@@ -1,9 +1,9 @@
 # Server Side APIs: Weather Dashboard
 
 ## Link
+https://connor-kfitz.github.io/purple-orangutan/
 
 ## Description
-
 The purpose of this project is to create a weather dashboard using HTML & CSS, powered by javascript.  The dashboard is to utilize a server side API provided by Open Weather.  It will display the weather conditions for today's date on a main weather card.  The five day forecast for that location will also be displayed on five smaller cards below.   
 
 ## Steps Taken
